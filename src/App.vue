@@ -1,30 +1,28 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div class="app-container">
+    <FullMovieContainer />
   </div>
-  <router-view/>
 </template>
 
+<script>
+import FullMovieContainer from '@/views/FullMoviesContainer.vue';
+
+export default {
+  components: {
+    FullMovieContainer,
+  },
+};
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+  html {
+    background-color: #f8da8b;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+  }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+  .app-container {
+    display: flex;
+    justify-content: center;
+  }
 </style>
