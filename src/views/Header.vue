@@ -27,6 +27,5 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 1rem;
   }
 </style>

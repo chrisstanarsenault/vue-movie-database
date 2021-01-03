@@ -1,7 +1,15 @@
 <template>
-  <div class="app-container">
-    <FullMovieContainer />
-  </div>
+  <Suspense>
+    <template #default>
+      <div class="app-container">
+        <FullMovieContainer />
+      </div>
+    </template>
+
+    <template #fallback>
+      <h1>Loading....</h1>
+    </template>
+  </Suspense>
 </template>
 
 <script>
