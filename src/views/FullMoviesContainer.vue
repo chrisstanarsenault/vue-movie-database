@@ -1,17 +1,24 @@
 <template>
-  <div class="full-container">
-    <div class="header-container">
-      <Header />
-    </div>
-    <div class="genre-movies-container">
-      <GenreSidebar :genres="genres" @getGenreId="getMoviesByGenre" />
-      <Movies :movies="movies" />
-    </div>
-  </div>
+  <Suspense>
+    <template #default>
+      <div class="full-container">
+        <div class="header-container">
+          <Header />
+        </div>
+        <div v-if="store.state.genres" class="genre-movies-container">
+          <GenreSidebar @getGenreId="getMoviesByGenre" />
+          <Movies :movies="movies" />
+        </div>
+      </div>
+    </template>
+
+    <template #fallback><h1>Loading</h1></template>
+  </Suspense>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onErrorCaptured, onMounted } from 'vue';
+import { defineComponent, ref, onErrorCaptured, onBeforeMount } from 'vue';
+import { useStore } from 'vuex';
 import axios from 'axios';
 
 import Header from '@/views/Header.vue';
@@ -25,13 +32,14 @@ export default defineComponent({
     GenreSidebar,
     Movies,
   },
-  setup() {
-    const genres = ref([]);
+  setup(props, context) {
+    // const genres = ref([]);
     const movies = ref([]);
+    const store = useStore();
     const getGenres = async () => {
       const response = await axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=a1d1f9d8d405b856379b76511512345c&language=en-US
 `);
-      genres.value = response.data;
+      store.dispatch('updateGenres', response.data.genres);
     };
     const getMovies = async () => {
       const response = await axios.get(
@@ -44,15 +52,15 @@ export default defineComponent({
       const response = await axios.get(
         `https://api.themoviedb.org/3/discover/movie?api_key=a1d1f9d8d405b856379b76511512345c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${id}`
       );
+
       movies.value = response.data.results;
     };
-
-    onMounted(() => {
+    onBeforeMount(() => {
       getGenres();
       getMovies();
     });
 
-    return { genres, getGenres, movies, getMovies, getMoviesByGenre };
+    return { getGenres, movies, getMovies, getMoviesByGenre, store };
   },
 });
 </script>

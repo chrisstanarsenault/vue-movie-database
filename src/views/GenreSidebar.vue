@@ -1,20 +1,23 @@
 <template>
   <div class="genres">
-    <Genres :genres="genres.genres" @getId="getId" />
+    <Genres @getId="getId" />
   </div>
 </template>
 
 <script lang='ts'>
-import { defineComponent } from 'vue';
+import { defineComponent, onBeforeMount } from 'vue';
+import { useStore } from 'vuex';
 import Genres from '@/components/Genres.vue';
 
 export default defineComponent({
   name: 'GenreSidebar',
-  props: ['genres', 'getGenreId'],
+  props: ['getGenreId'],
   components: {
     Genres,
   },
+
   setup(props, context) {
+    const store = useStore();
     let id = null;
     const sendGenreId = (id: number) => {
       context.emit('getGenreId', id);
@@ -24,9 +27,12 @@ export default defineComponent({
       id = gid;
       sendGenreId(id);
     };
+
     return {
       sendGenreId,
       getId,
+      useStore,
+      store,
     };
   },
   methods: {

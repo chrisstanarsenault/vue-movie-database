@@ -1,14 +1,10 @@
 <template>
   <Suspense>
-    <template #default>
-      <div class="app-container">
-        <FullMovieContainer />
-      </div>
-    </template>
-
-    <template #fallback>
-      <h1>Loading....</h1>
-    </template>
+    <template #default
+      ><div class="app-container">
+        <FullMovieContainer /></div
+    ></template>
+    <template #fallback><h1>Loading</h1></template>
   </Suspense>
 </template>
 

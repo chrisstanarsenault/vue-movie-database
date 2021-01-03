@@ -1,7 +1,8 @@
 <template>
+  {{ log(genres) }}
   <ul>
     <li
-      v-for="genre in genres"
+      v-for="genre in store.state.genres"
       :key="genre.name"
       @click="sendGenreId(genre.id)"
     >
@@ -12,18 +13,27 @@
 
 <script lang='ts'>
 import { defineComponent } from 'vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'Genres',
-  props: ['genres', 'getGenreId'],
+  props: ['getGenreId'],
   setup(props, context) {
+    const store = useStore();
     const sendGenreId = (id: number) => {
       context.emit('getId', id);
     };
 
     return {
       sendGenreId,
+      store,
+      useStore,
     };
+  },
+  methods: {
+    log(m: any) {
+      return console.log(m);
+    },
   },
 });
 </script>
@@ -37,6 +47,7 @@ export default defineComponent({
     font-size: 1.5rem;
     color: #e4d03a;
     padding: 1rem;
+    cursor: pointer;
     transition: background 0.7s ease-out;
   }
 
