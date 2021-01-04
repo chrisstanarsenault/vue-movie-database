@@ -1,18 +1,32 @@
 <template>
   <div class="all-movies">
-    <MovieCard v-for="movie in movies" :key="movie.id" :movie="movie" />
+    <MovieCard
+      v-for="movie in store.state.movies"
+      :key="movie.id"
+      :movie="movie"
+    />
   </div>
 </template>
 
 <script lang='ts'>
 import { defineComponent } from 'vue';
+import { useStore } from 'vuex';
 import MovieCard from '@/components/MovieCard.vue';
+import getInitialMovies from '@/services/getInitialMovies';
 
 export default defineComponent({
   name: 'Movies',
-  props: ['movies'],
   components: {
     MovieCard,
+  },
+  async setup() {
+    const store = useStore();
+    await getInitialMovies();
+
+    return {
+      store,
+      getInitialMovies,
+    };
   },
   methods: {
     log(m: any) {

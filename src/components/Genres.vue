@@ -1,10 +1,9 @@
 <template>
-  {{ log(genres) }}
   <ul>
     <li
       v-for="genre in store.state.genres"
       :key="genre.name"
-      @click="sendGenreId(genre.id)"
+      @click="getMoviesByGenre(genre.id)"
     >
       {{ genre.name }}
     </li>
@@ -15,19 +14,18 @@
 import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
 
+import getMoviesByGenre from '@/services/getMoviesByGenre';
+import getGenres from '@/services/getGenres';
+
 export default defineComponent({
   name: 'Genres',
-  props: ['getGenreId'],
-  setup(props, context) {
+  async setup() {
     const store = useStore();
-    const sendGenreId = (id: number) => {
-      context.emit('getId', id);
-    };
-
+    getGenres();
     return {
-      sendGenreId,
       store,
-      useStore,
+      getMoviesByGenre,
+      getGenres,
     };
   },
   methods: {

@@ -8,6 +8,7 @@ export default createStore({
   mutations: {
     UPDATE_MOVIES(state, value) {
       state.movies = value;
+      // console.log('Mut: ', value);
     },
     UPDATE_GENRES(state, value) {
       state.genres = value;
@@ -16,6 +17,7 @@ export default createStore({
   actions: {
     updateMovies({ state, commit }, value) {
       commit('UPDATE_MOVIES', value);
+      // console.log('Action: ', value);
     },
     updateGenres({ state, commit }, value) {
       commit('UPDATE_GENRES', value);
