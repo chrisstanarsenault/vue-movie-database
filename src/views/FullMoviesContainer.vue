@@ -12,7 +12,7 @@
       </div>
     </template>
     <template #fallback>
-      <h1>Test</h1>
+      <h1>Loading.......</h1>
     </template>
   </Suspense>
 </template>
@@ -20,9 +20,6 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue';
 import { useStore } from 'vuex';
-
-// import getGenres from '@/services/getGenres';
-import getInitialMovies from '@/services/getInitialMovies';
 
 import Header from '@/views/Header.vue';
 import GenreSidebar from '@/views/GenreSidebar.vue';
@@ -38,11 +35,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
 
-    onMounted(() => {
-      getInitialMovies();
-    });
-
-    return { getInitialMovies, store };
+    return { store };
   },
 });
 </script>
