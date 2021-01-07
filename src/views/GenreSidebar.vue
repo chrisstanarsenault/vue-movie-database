@@ -5,9 +5,9 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, onBeforeMount } from 'vue';
+import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
-import Genres from '@/components/Genres.vue';
+import Genres from '@/components/Genres/Genres.vue';
 
 export default defineComponent({
   name: 'GenreSidebar',

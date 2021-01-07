@@ -22,7 +22,7 @@ export default defineComponent({
   props: ['movie'],
   setup() {
     const imgUrl = 'https://image.tmdb.org/t/p/w500';
-    const log = (m: any) => console.log(m);
+    const log = (m: any): any => console.log(m);
 
     return {
       imgUrl,

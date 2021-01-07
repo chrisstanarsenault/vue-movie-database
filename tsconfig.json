@@ -33,7 +33,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "tests/unit/Genre.spec.js", "src/components/Movies/MovieCard.vue", "src/components/Header/Searchbar.vue", "src/components/Header/RatingTypeFilter.vue", "src/components/Header/Logo.vue", "src/components/Genres/Genres.vue"  ],
   "exclude": [
     "node_modules"
   ]

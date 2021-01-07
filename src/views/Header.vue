@@ -8,9 +8,9 @@
 
 <script lang='ts'>
 import { defineComponent } from 'vue';
-import Logo from '@/components/Logo.vue';
-import Searchbar from '@/components/Searchbar.vue';
-import RatingTypeFilter from '@/components/RatingTypeFilter.vue';
+import Logo from '@/components/Header/Logo.vue';
+import Searchbar from '@/components/Header/Searchbar.vue';
+import RatingTypeFilter from '@/components/Header/RatingTypeFilter.vue';
 
 export default defineComponent({
   name: 'Header',
